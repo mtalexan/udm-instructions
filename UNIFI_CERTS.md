@@ -128,7 +128,7 @@ scp domain.key root@192.168.1.1:/mnt/data/system/ssl/private/cloudkey.key
 scp domain.fullchain.crt root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.crt
 scp domain.key root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.key
 ```
-*should these be full chains or just the individual cert?*
+TODO: The following is still in progress.  *should these be full chains or just the individual cert?*
 ```
 scp domain.fullchain.crt root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/ca.pem
 scp domain.key root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/ca.key
