@@ -28,7 +28,7 @@ openssl pkcs12 -export -in domain.crt -inkey domain.key -certfile domain.fullcha
 You will have a domain.p12 file after this step that is password protected and contains your private key, your public certificate, and the chain of trust from a root CA.
 
 # SSH into the UDM/UDM-P
-SSH into your router.  This is usually 192.168.1.1 and the username is always `root` (the SSH settings in the GUI do nothing at all).  The password is your admin user's password, which is your global Unifi password is you have remote login enabled.
+SSH into your router.  This is usually 192.168.1.1 and the username is always `root`.  See the README.md for how to set the username and password.
 
 # Locate the files
 On your router, you'll need to locate the certificates and keys you're going to replace.  The exact location varies a little bit between versions, so you'll need to locate exactly where they are.
