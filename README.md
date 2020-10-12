@@ -9,4 +9,5 @@ All the instructions here will require you to log into your router manually via 
 No changes here will survive a firmware update of the UDM/UDM-P, and will need to be repeated after each update.
 
 # SSH Problems
-Due to incredibly poor implementation, the "SSH Settings" available from the GUI configuration has absolutely no effect on anything.  The SSH login is always `root` and the password is always the primary administrator's password to log into the GUI.  This is your Unifi account password if you have Remote Management enabled.
+Due to incredibly poor implementation, prior to the 1.8.0 UDM release the "SSH Settings" available from the GUI configuration has absolutely no effect on anything.  The SSH login is always `root` and the password is always the primary administrator's password to log into the GUI.  This is your Unifi account password if you have Remote Management enabled.
+If you have UDM 1.8.0 or later however, the settings can be properly configured in the specific Device configuration (not Network Settings, but the device specific settings where you can power off and/or reboot the device remotely).
