@@ -34,6 +34,7 @@ SSH into your router.  This is usually 192.168.1.1 and the username is always `r
 On your router, you'll need to locate the certificates and keys you're going to replace.  The exact location varies a little bit between versions, so you'll need to locate exactly where they are.
 
 ## Find the "cloudkey" files
+These files appear to have been removed in UDM release 1.8.0, so skip them if they aren't found.
 ```
 find / -name "cloudkey.crt"
 find / -name "cloudkey.key"
@@ -59,6 +60,35 @@ From here on, these instructions will assume the files are at:
 /mnt/data/unifi-os/unifi-core/config/unifi-core.key
 ```
 
+# Find the RADIUS server files
+*There are claims that this does not work with wildcard certificates*
+```
+find -type f -name "*.pem" -not -path "*/etc/ssl/certs/*" -not -path "*/run/*" -not -name "letsencrypt.pem"
+```
+This will likely produce a few results that look something 
+like this:
+```
+./mnt/data/udapi-config/raddb/certs/ca.pem
+./mnt/data/udapi-config/raddb/certs/server-key.pem
+./mnt/data/udapi-config/raddb/certs/server.pem
+./mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem
+./mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem
+```
+
+From this we get 3 sets of files:
+```
+./mnt/data/udapi-config/raddb/certs/ca.pem
+./mnt/data/udapi-config/raddb/certs/ca.key
+```
+```
+./mnt/data/udapi-config/raddb/certs/server.pem
+./mnt/data/udapi-config/raddb/certs/server-key.pem
+```
+```
+./mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem
+./mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem
+```
+
 ## Find Java keytool and keystore
 Java uses its own keystore that is accessed via a `keytool` tool.
 
@@ -80,6 +110,12 @@ cp -a /mnt/data/system/ssl/private/cloudkey.crt{,.old}
 cp -a /mnt/data/system/ssl/private/cloudkey.key{,.old}
 cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.crt{,.old}
 cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.key{,.old}
+cp -a /mnt/data/udapi-config/raddb/certs/ca.pem{,.old}
+cp -a /mnt/data/udapi-config/raddb/certs/ca.key{,.old}
+cp -a /mnt/data/udapi-config/raddb/certs/server.pem{,.old}
+cp -a /mnt/data/udapi-config/raddb/certs/server-key.pem{,.old}
+cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem{,.old}
+cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem{,.old}
 ```
 
 # Replace the Unifi certs & keys
@@ -91,6 +127,15 @@ scp domain.fullchain.crt root@192.168.1.1:/mnt/data/system/ssl/private/cloudkey.
 scp domain.key root@192.168.1.1:/mnt/data/system/ssl/private/cloudkey.key
 scp domain.fullchain.crt root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.crt
 scp domain.key root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.key
+```
+*should these be full chains or just the individual cert?*
+```
+scp domain.fullchain.crt root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/ca.pem
+scp domain.key root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/ca.key
+scp domain.fullchain.crt root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/server.pem
+scp domain.key root@192.168.1.1:/mnt/data/udapi-config/raddb/certs/server-key.pem
+scp domain.fullchain.crt root@192.168.1.1:/mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem
+scp domain.key root@192.168.1.1:/mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem
 ```
 
 # Update the Java keystore
