@@ -106,16 +106,16 @@ Since there are a bunch of options, these instructions will use the placeholder 
 # Backup the Unifi certs & keys
 On your router, using the file paths found in the prior step
 ```
-cp -a /mnt/data/system/ssl/private/cloudkey.crt{,.old}
-cp -a /mnt/data/system/ssl/private/cloudkey.key{,.old}
-cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.crt{,.old}
-cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.key{,.old}
-cp -a /mnt/data/udapi-config/raddb/certs/ca.pem{,.old}
-cp -a /mnt/data/udapi-config/raddb/certs/ca.key{,.old}
-cp -a /mnt/data/udapi-config/raddb/certs/server.pem{,.old}
-cp -a /mnt/data/udapi-config/raddb/certs/server-key.pem{,.old}
-cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem{,.old}
-cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem{,.old}
+cp -a /mnt/data/system/ssl/private/cloudkey.crt /mnt/data/system/ssl/private/cloudkey.crt.old
+cp -a /mnt/data/system/ssl/private/cloudkey.key /mnt/data/system/ssl/private/cloudkey.key.old
+cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.crt /mnt/data/unifi-os/unifi-core/config/unifi-core.crt.old
+cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.key /mnt/data/unifi-os/unifi-core/config/unifi-core.key.old
+cp -a /mnt/data/udapi-config/raddb/certs/ca.pem /mnt/data/udapi-config/raddb/certs/ca.pem.old
+cp -a /mnt/data/udapi-config/raddb/certs/ca.key  /mnt/data/udapi-config/raddb/certs/ca.key.old
+cp -a /mnt/data/udapi-config/raddb/certs/server.pem /mnt/data/udapi-config/raddb/certs/server.pem.old
+cp -a /mnt/data/udapi-config/raddb/certs/server-key.pem /mnt/data/udapi-config/raddb/certs/server-key.pem.old
+cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem /mnt/data/udapi-config/udapi-bridge/ubios-udapi-cert.pem.old
+cp -a /mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem /mnt/data/udapi-config/udapi-bridge/ubios-udapi-key.pem.old
 ```
 
 # Replace the Unifi certs & keys
