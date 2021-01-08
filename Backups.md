@@ -7,7 +7,7 @@ Backups are primarily accomplished thru the built-in tools in the Network Settin
 * Creating backups on demand
 Backups are created in the local storage of the UDM/UDMP and must be manually moved/downloaded to alternative storage.
 
-An alternative is the (BackiFi)[https://backifi.com] free service.  This is a third-party tool that allows you to automate logins to your UDM/UDMP from their server that generate and download backups using the "manual" option, and then upload those files to a cloud storage provider you specify/own.
+An alternative is the [BackiFi](https://backifi.com) free service.  This is a third-party tool that allows you to automate logins to your UDM/UDMP from their server that generate and download backups using the "manual" option, and then upload those files to a cloud storage provider you specify/own.
 
 # Console
 Backups are related to the Network app, so they are under the data folder associated with it.  When SSH-ed into the device, all automatically generated backups are found at `/mnt/data/unifi-os/unifi/data/backups/autobackup/`.
@@ -32,4 +32,4 @@ Restoring from a backup is accomplished from the Network Settings menu under the
 
 Restoration occurs atomically, so a failed restoration will not leave your system in a partially restored state.
 
-After a Factory Reset, you must complete the First Time Setup wizard before you are able to access the Restore settings.  Be aware of the (limitations)[#Limits] of the backups, there are some parts of the First Time Setup that are not overwritten by a restore.
+After a Factory Reset, you must complete the First Time Setup wizard before you are able to access the Restore settings.  Be aware of the [limitations](Limits) of the backups, there are some parts of the First Time Setup that are not overwritten by a restore.
