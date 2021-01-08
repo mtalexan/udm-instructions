@@ -1,4 +1,4 @@
-# Create a Certificate Singing Request
+# Create a Certificate Signing Request
 Follow standard online directions for generating a private key and creating a Certificate Signing Request (CSR) for a domain you control/own.
 
 You will have a domain.key and domain.csr after this step, where domain.key is the private key and domain.csr is your signing request.
