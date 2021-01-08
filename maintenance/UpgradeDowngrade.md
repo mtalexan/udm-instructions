@@ -1,24 +1,39 @@
 # Upgrades 
-Upgrades can be configured to occur automatically, triggered from the Device Settings (not Network Settings) manually, run manually with HTTP firmware links from the Network -> Devices page under the UDM/UDMP device's -> Settings -> Maintenance section, or performed manually from the SSH console with an HTTP or HTTPS firmware link.
+Upgrades can be configured to occur automatically, triggered from the Device Settings (not Network Settings) manually, or performed manually from the SSH console with an HTTP or HTTPS firmware link.
 
-# Beta vs Release Channels
-Joining the beta channel is quick, easy, and free.  It comes with access to additional community forums, and access to a update channel selector dropdown in the Device Settings.  However it also requires you to agree to extensive Terms of Service that include not talking about the contents of the Beta releases.  These TOS are actually enforced, and have resulted in some Youtubers having action taken against them when they weren't very careful about what they said (supposedly).
+## Limitations
+Be aware of the upgrade limitations posted in the forums with each release.  Official candidates only infrequently have restrictions on what version you can apply them to, but Beta and Release Candidates (RCs) often have more.  
+
+***It's not clear whether the automatic updates or manually triggered upgrades are aware of the upgrade restrictions, so be careful with setting the Beta or Release Candidate channels*** 
+
+## Beta vs Release Candidate vs Official Channels
+Joining the beta channel is quick, easy, and free.  It comes with access to additional community forums, and access to an update channel selector dropdown in the Device Settings.  However it also requires you to agree to extensive Terms of Service that include not talking about the contents of the Beta/RC releases.  These TOS are actually enforced, and have resulted in some Youtubers having action taken against them when they weren't very careful about what they said (supposedly).
 Sign up is available [here](http://www.ubnt.com/beta) and grants immediately access to the beta community forums.
 
-Once you are part of the Beta community, an additional drop-down selector will become available in your UDM/UDMP Device Settings (not Network Settings), though it remains set to the Release channel by default.  Modifying this value controls what software versions are considered to be available for upgrade, affecting both automatic updates and whether/when the manual update link in the Device Settings is displayed.
+Once you are part of the Beta community, an additional drop-down selector will become available in your UDM/UDMP Device Settings (not Network Settings), though it remains set to the Official channel by default.  Modifying this value controls what software versions are considered to be available for upgrade, affecting both automatic updates and whether/when the manual update link in the Device Settings is displayed.
 
-# Automatic Updates
+Unless you have joined the Beta community, the dropdown channel selector is not visible and is permanently set to "Official".
 
+## Checking for new versions
+Check for available updates occurs based on a configured check frequency in the Device Settings.  If a newer version than what is currently running is found for the selected [update Channel](Beta vs Release Candidate vs Official Channels), it is identfied as being available and can be applied via [automatic update](Automatic Updates) or [manually triggered upgrade](Manually Triggered Upgrades).
 
-Blah Blah TODO
+## Automatic Updates
+Automatic updates can be enabled or disabled, and a frequency set for how often new updates are checked/applied.  During First Time Setup, this is a single drop down that lets you pick to disable or a check frequency, but afterward you're able to separately modify the check frequency and whether the updates are applied automatically or not.
 
-When enabled, the automatic updates will always follow the Release channel unless you have signed up for the Beta community .  Only if you have Beta channel access with the account that is the owner of the UDM/UDMP will you have a drop down present in the Device Settings that allows you to configure which channel you want to use for automatic updates.
-The Update Channel setting is used, if present, even when automatic updates are not enabled to pick the "newest" version of software available.  When there is a newer version of software than the one you're running available, a link below the current version number in the Device Settings will be present telling you so.  Clicking the link will automatically upgrade to the newest available version in your selected channel.
+Enabling automatic updates will automatically apply the updates at *TBD* time in the local timezone after a new update is [discovered](Checking for new versions).  
 
+## Manually Triggered Upgrades
+Manually triggered upgrades are available when a [new version is found](Checking for new versions) and either [automatic updates](Automatic Updates) are disabled, or the time window during which they are applied has not yet been reached.
+When an upgrade is available for manual triggering, a hyperlink is shown below the version number in the Device Settings informing you that an upgrade is available.  Clicking it will prompt you to begin applying it.
 
+## Via SSH Console
+When new firmware is released on the [forums](https://community.ui.com/releases), it includes the directions for applying it from the SSH console, and HTTPS hyperlinks the UDM and UDMP firmware can be found at.  Logging into the UDM/UDMP via SSH and running the commands as instructed will automatically download and apply the upgrade, including rebooting the device.
 
+# Downgrading
+Downgrading is strongly discouraged due to the requirements in performing it, the potential for bricking your device, and the high likelihood you will have to reconfigure your network from scratch.  However it's sometimes the only solution when you have applied an upgrade that doesn't work.
 
-# Downgrading & Backups
+# Limitations
+Downgrading is allowed, but just like 
 
 Backups can only be restored to equal or newer versions of the Network app.  So if you downgrade the version of software in your unit, you probably won't be able to restore your most recent backup and will need to reconstruct your configuration from scratch.  However backups are forward compatible.  You can restore a backup from an older version on a newer software version.
 Automatic backups contain the version number of the Network app they were generated from in their file names.  This can be handy in determining what version of software you can apply them to, but does require resolving a UDM/UDMP version number to its associated `Unifi Network` version number (available in the release notes https://community.ui.com/releases).
