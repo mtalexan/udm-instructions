@@ -33,18 +33,18 @@ SSH into your router.  This is usually 192.168.1.1 and the username is always `r
 # Locate the files
 On your router, you'll need to locate the certificates and keys you're going to replace.  The exact location varies a little bit between versions, so you'll need to locate exactly where they are.
 
-## Find the "cloudkey" files
-These files appear to have been removed in UDM release 1.8.0, so skip them if they aren't found.
+## Find the certificate and key files
+These files appear to have been removed in UDM release 1.8.0 thru 1.8.4, so skip them if they aren't found, but have been renamed to `server.crt` and `server.key` in 1.8.5.
 ```
-find / -name "cloudkey.crt"
-find / -name "cloudkey.key"
+find / -name "*.crt" -not -path "*/mozilla/*" -not -path "*/podman/*" -not -path "*/containers/*" -not -name "ca-certificates*"
+find / -name "*.key" -not -path "*/mozilla/*" -not -path "*/podman/*" -not -path "*/containers/*" -not -path "*/raddb/*" -not -name "ca-certificates*"
 ```
-These will be in the same directory, likely something like /mnt/data/system/ssl/private/
+These two files will be in the same directory, likely something like `/mnt/data/system/ssl/private/` or `/mnt/data/system/ssl/private/redirector/`
 
 From here on, these instructions will assume the files are at:
 ```
-/mnt/data/system/ssl/private/cloudkey.crt
-/mnt/data/system/ssl/private/cloudkey.key
+/mnt/data/system/ssl/private/redirector/server.crt
+/mnt/data/system/ssl/private/redirector/server.key
 ```
 
 ## Find the "unifi-core" files
@@ -52,7 +52,7 @@ From here on, these instructions will assume the files are at:
 find / -name "unifi-core.crt"
 find / -name "unifi-core.key"
 ```
-These will be in the same directory, likely something like /mnt/data/unifi-os/unifi-core/config/
+These will be in the same directory, likely something like `/mnt/data/unifi-os/unifi-core/config/`
 
 From here on, these instructions will assume the files are at:
 ```
@@ -77,8 +77,8 @@ Since there are a bunch of options, these instructions will use the placeholder 
 # Backup the Unifi certs & keys
 On your router, using the file paths found in the prior step
 ```
-cp -a /mnt/data/system/ssl/private/cloudkey.crt /mnt/data/system/ssl/private/cloudkey.crt.old
-cp -a /mnt/data/system/ssl/private/cloudkey.key /mnt/data/system/ssl/private/cloudkey.key.old
+cp -a /mnt/data/system/ssl/private/redirector/server.crt /mnt/data/system/ssl/private/redirector/server.crt.old
+cp -a /mnt/data/system/ssl/private/redirector/server.key /mnt/data/system/ssl/private/redirector/server.key.old
 cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.crt /mnt/data/unifi-os/unifi-core/config/unifi-core.crt.old
 cp -a /mnt/data/unifi-os/unifi-core/config/unifi-core.key /mnt/data/unifi-os/unifi-core/config/unifi-core.key.old
 ```
@@ -88,8 +88,8 @@ From your PC, you'll scp the files to your router.  You'll need to enter the pas
 
 Be sure to replace the IP address with your router's, and the paths with those you found in the prior steps.
 ```
-scp domain.fullchain.crt root@192.168.1.1:/mnt/data/system/ssl/private/cloudkey.crt
-scp domain.key root@192.168.1.1:/mnt/data/system/ssl/private/cloudkey.key
+scp domain.fullchain.crt root@192.168.1.1:/mnt/data/system/ssl/private/redirector/server.crt
+scp domain.key root@192.168.1.1:/mnt/data/system/ssl/private/redirector/server.key
 scp domain.fullchain.crt root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.crt
 scp domain.key root@192.168.1.1:/mnt/data/unifi-os/unifi-core/config/unifi-core.key
 ```
