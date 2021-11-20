@@ -1,3 +1,9 @@
+# TL;DR
+* RADIUS doesn't use internet-type certificates, it uses uniquely generated certificate authorities (CAs) and keys.
+* Network users will need to receive their username, password, and a CA certificate. Jump down to [Using The Generated RADIUS CA](#using-the-generated-radius-ca) to see how to get the CA certificate you should distribute.
+* UDM/UDM-P generates unique keys and certificates on first enabling of the RADIUS.
+* Built-in UniFi cloud backup of the Network App includes the RADIUS keys and certificates so cloud restore recovers them.
+
 # Overview
 The RADIUS server that comes built in to the UDM and UDM-Pro is a FreeRADIUS server that has been preconfigured.  Because it runs in a podman container, and some of the configuration files are modified automatically based on the WebUI, care should be taken when modifying the FreeRADIUS configuration.
 
@@ -99,14 +105,14 @@ scp ./my-radius-backup-dir/ca.{key,pem} root@192.168.1.1:/mnt/data/udapi-config/
 If for some reason you're unhappy with the perfectly secure automatically generated keys and certificates, you can follow the directions provided by FreeRADIUS to generate them on any machine, then copy them to the UDM/UDM-P.  
 
 1. Generating these manually it outside the scope of this document, read about how to do it on the FreeRADIUS project
-2. Follow the [Restore Keys from Backup](#restore_keys_from_backup) directions above
+2. Follow the [Restore Keys from Backup](#restore-keys-from-backup) directions above
 
 # Using an Enterprise Shared RADIUS CA
 *This is a rather unique use-case and unlikely to apply to most users.*
 
-If your use case requires you to use a RADIUS certificate signed by an externally shared CA, you will need to generate a server-specific key-pair, sign it with the appropriate CA, and replace the server key and server certificate in the UDM/UDM-P (see the [Restore Keys from Backup](#restore_keys_from_backup) directions above).
+If your use case requires you to use a RADIUS certificate signed by an externally shared CA, you will need to generate a server-specific key-pair, sign it with the appropriate CA, and replace the server key and server certificate in the UDM/UDM-P (see the [Restore Keys from Backup](#restore-keys-from-backup) directions above).
 
-Instructions for generating a new key-pair and using an existing CA to sign it are left to the reader. Some details may be found in the [Advanced Details](#freeradius_certificate_generator).
+Instructions for generating a new key-pair and using an existing CA to sign it are left to the reader. Some details may be found in the [Advanced Details](#freeradius-certificate-generator).
 
 The Shared RADIUS CA certificate is what is supplied to network users.
 
